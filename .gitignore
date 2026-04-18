@@ -1,1 +1,6 @@
-data
+.ollama/
+.nv/
+*.log
+__pycache__/
+*.pyc
+.env
