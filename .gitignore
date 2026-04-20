@@ -1,6 +1,21 @@
-.ollama/
-.nv/
-*.log
+cat > .gitignore << 'EOF'
+# Large data files
+data/
+chroma_db/
+bm25_index.pkl
+*.zip
+*.pkl
+
+# Python
 __pycache__/
 *.pyc
 .env
+
+# Model cache
+.cache/
+.ollama/
+.nv/
+
+# Logs
+*.log
+EOF

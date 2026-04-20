@@ -1,3 +1,7 @@
-ollama
-chromadb
 streamlit
+requests
+chromadb
+sentence-transformers
+langchain-text-splitters
+rank-bm25
+ragas
