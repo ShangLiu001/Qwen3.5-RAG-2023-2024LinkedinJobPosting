@@ -5,7 +5,7 @@
 
 > CS 6120 Natural Language Processing — Final Project  
 > Northeastern University, Khoury College of Computer Science  
-> Shang Chen | Spring 2026
+> Shang Liu | Spring 2026
 
 CareerRAG answers natural language career questions by grounding responses in 625,000 real data points from LinkedIn job postings, Glassdoor employee reviews, and the Stack Overflow Developer Survey. All inference is fully local — no external API calls.
 
