@@ -234,7 +234,14 @@ if query:
     st.session_state.messages.append({"role": "assistant", "content": response})
 
     with st.expander(f"📚 {len(chunks)} sources retrieved", expanded=True):
-        tabs = st.tabs(["All"] + list({c["source"] for c in chunks}))
+        source_display = {
+            "linkedin_jobs"       : "💼 LinkedIn",
+            "glassdoor_reviews"   : "⭐ Glassdoor",
+            "stackoverflow_survey": "📊 Stack Overflow",
+        }
+        unique_sources = list({c["source"] for c in chunks})
+        tab_labels     = ["All"] + [source_display.get(s, s) for s in unique_sources]
+        tabs           = st.tabs(tab_labels)
         all_chunks = chunks
 
         def render_chunks(chunk_list):
@@ -257,16 +264,24 @@ if query:
                 else:
                     badge = "🟠 Stack Overflow"
                     title = meta.get("role", "Developer")
-                    sub   = f"{meta.get('country','?')} · {meta.get('years_exp','?')} yrs"
+                    country  = meta.get('country',  '') or '?'
+                    yrs      = meta.get('years_exp','') or '?'
+                    sub      = f"{country} · {yrs} yrs exp"
 
                 score_key = "rerank_score" if "rerank_score" in c else "rrf_score"
                 score = round(c.get(score_key, 0), 3)
+
+                # update the caption to clarify what the score means
+                if "rerank_score" in c:
+                    score_label = f"rerank: `{score}`"
+                else:
+                    score_label = f"rrf: `{score}`"
 
                 with st.container():
                     c1, c2 = st.columns([6, 1])
                     with c1:
                         st.markdown(f"**{badge}** — {title}")
-                        st.caption(f"{sub} · score: `{score}`")
+                        st.caption(f"{sub} · {score_label}")
                     with c2:
                         st.link_button("↗", url)
                     with st.expander("View chunk"):
