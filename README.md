@@ -1,5 +1,5 @@
 
-# CareerRAG 💼
+# CareerRAG 
 
 **Multi-source Retrieval-Augmented Generation for Career Intelligence**
 
